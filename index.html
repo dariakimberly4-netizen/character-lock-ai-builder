@@ -1,0 +1,155 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>CHARACTER//LOCK</title>
+<style>
+:root{--bg:#0d0d12;--panel:#171720;--panel2:#21212d;--text:#f6f3ff;--muted:#aaa6b6;--accent:#8b5cf6;--line:#323241;--ok:#52d273}
+*{box-sizing:border-box}body{margin:0;font-family:Inter,system-ui,Arial,sans-serif;background:radial-gradient(circle at top,#1d1633 0,#0d0d12 42%);color:var(--text)}button,input,select,textarea{font:inherit}.app{min-height:100vh;display:grid;grid-template-columns:260px 1fr}.sidebar{border-right:1px solid var(--line);padding:24px 18px;background:rgba(13,13,18,.86);backdrop-filter:blur(18px);position:sticky;top:0;height:100vh}.brand{font-weight:900;letter-spacing:.08em;font-size:21px}.brand span{color:var(--accent)}.sub{color:var(--muted);font-size:12px;margin:6px 0 24px}.nav button{width:100%;text-align:left;border:0;background:transparent;color:var(--muted);padding:12px 14px;border-radius:12px;margin:4px 0;cursor:pointer}.nav button.active,.nav button:hover{background:var(--panel2);color:var(--text)}.main{padding:28px;max-width:1400px;width:100%;margin:auto}.top{display:flex;justify-content:space-between;gap:16px;align-items:center;margin-bottom:24px}.title h1{margin:0;font-size:clamp(28px,4vw,48px)}.title p{margin:8px 0 0;color:var(--muted)}.primary{background:var(--accent);border:0;color:white;padding:12px 16px;border-radius:12px;font-weight:800;cursor:pointer}.ghost{background:transparent;border:1px solid var(--line);color:var(--text);padding:12px 16px;border-radius:12px;cursor:pointer}.grid{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(320px,.8fr);gap:20px}.stack{display:grid;gap:16px}.card{background:linear-gradient(180deg,rgba(28,28,39,.95),rgba(18,18,25,.95));border:1px solid var(--line);border-radius:20px;padding:18px;box-shadow:0 20px 60px rgba(0,0,0,.22)}.card h3{margin:0 0 12px;font-size:16px}.fieldgrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.field{display:grid;gap:7px}.field.full{grid-column:1/-1}.field label{font-size:12px;color:var(--muted)}input,select,textarea{width:100%;background:#111119;border:1px solid var(--line);color:var(--text);border-radius:12px;padding:11px 12px;outline:none}textarea{min-height:92px;resize:vertical}input:focus,select:focus,textarea:focus{border-color:var(--accent)}.preview{min-height:470px;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden}.avatar{width:220px;height:220px;border-radius:50%;background:conic-gradient(from 200deg,#2a1b4c,#6341a8,#a88df4,#2a1b4c);display:grid;place-items:center;box-shadow:0 0 0 14px rgba(139,92,246,.08),0 0 80px rgba(139,92,246,.2)}.avatar:before{content:'CHAR';display:grid;place-items:center;width:162px;height:162px;border-radius:50%;background:#101016;border:1px solid #4a425f;color:#c8b8ff;font-weight:900;font-size:36px;letter-spacing:.12em}.lockpill{position:absolute;top:18px;right:18px;background:#142119;border:1px solid #255f35;color:#8df3a8;border-radius:999px;padding:8px 12px;font-size:12px;font-weight:800}.score{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:14px}.metric{background:#111119;border:1px solid var(--line);border-radius:14px;padding:10px;text-align:center}.metric b{display:block;font-size:20px}.metric span{font-size:11px;color:var(--muted)}.promptbox{white-space:pre-wrap;background:#0f0f15;border:1px dashed #4b4363;border-radius:14px;padding:14px;min-height:160px;color:#ded7f8;font-size:13px}.row{display:flex;gap:10px;flex-wrap:wrap}.chips{display:flex;flex-wrap:wrap;gap:8px}.chip{border:1px solid var(--line);background:#12121a;color:#d7d0eb;padding:8px 10px;border-radius:999px;font-size:12px;cursor:pointer}.chip.active{border-color:var(--accent);background:#25193e;color:white}.library{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}.charcard{padding:16px;border:1px solid var(--line);border-radius:16px;background:#14141d}.charcard b{display:block;margin-bottom:5px}.charcard small{color:var(--muted)}.hidden{display:none}.mobilebar{display:none}
+@media(max-width:900px){.app{display:block}.sidebar{display:none}.main{padding:18px 14px 90px}.grid{grid-template-columns:1fr}.fieldgrid{grid-template-columns:1fr}.library{grid-template-columns:1fr}.mobilebar{display:grid;grid-template-columns:repeat(4,1fr);position:fixed;left:0;right:0;bottom:0;background:#111118;border-top:1px solid var(--line);z-index:10}.mobilebar button{border:0;background:transparent;color:#aaa6b6;padding:14px 6px;font-size:11px}.top{align-items:flex-start}.top .row{justify-content:flex-end}.score{grid-template-columns:repeat(2,1fr)}}
+</style>
+</head>
+<body>
+<div class="app">
+  <aside class="sidebar">
+    <div class="brand">CHARACTER<span>//LOCK</span></div>
+    <div class="sub">AI Character Sheet Builder</div>
+    <div class="nav">
+      <button class="active" data-view="builder">Create Character</button>
+      <button data-view="characters">My Characters</button>
+      <button data-view="prompts">Prompt Library</button>
+      <button data-view="scene">Scene Builder</button>
+    </div>
+  </aside>
+  <main class="main">
+    <section id="builderView">
+      <div class="top">
+        <div class="title"><h1>Create once. Keep the same character.</h1><p>Define identity, lock visual traits, and reuse your character consistently.</p></div>
+        <div class="row"><button class="ghost" id="newBtn">New</button><button class="primary" id="saveBtn">Save Character</button></div>
+      </div>
+      <div class="grid">
+        <div class="stack">
+          <div class="card">
+            <h3>Character Identity</h3>
+            <div class="fieldgrid">
+              <div class="field"><label>Name</label><input id="name" placeholder="e.g. Mira Sol" /></div>
+              <div class="field"><label>Character ID</label><input id="charId" placeholder="Auto-generated" /></div>
+              <div class="field"><label>Age / apparent age</label><input id="age" placeholder="28" /></div>
+              <div class="field"><label>Role</label><input id="role" placeholder="Hero, mentor, explorer…" /></div>
+              <div class="field full"><label>Personality / biography</label><textarea id="bio" placeholder="Describe who this character is…"></textarea></div>
+            </div>
+          </div>
+          <div class="card">
+            <h3>Face Lock</h3>
+            <div class="fieldgrid">
+              <div class="field"><label>Face shape</label><input id="face" placeholder="Oval" /></div>
+              <div class="field"><label>Skin tone</label><input id="skin" placeholder="Warm brown" /></div>
+              <div class="field"><label>Eyes</label><input id="eyes" placeholder="Almond, dark brown" /></div>
+              <div class="field"><label>Brows / nose / lips</label><input id="features" placeholder="Defined brows, straight nose…" /></div>
+              <div class="field full"><label>Distinctive features</label><input id="marks" placeholder="Freckles, scar, dimples…" /></div>
+            </div>
+          </div>
+          <div class="card">
+            <h3>Hair & Body Lock</h3>
+            <div class="fieldgrid">
+              <div class="field"><label>Hair</label><input id="hair" placeholder="Short layered black pixie" /></div>
+              <div class="field"><label>Build</label><input id="build" placeholder="Petite athletic" /></div>
+              <div class="field"><label>Height</label><input id="height" placeholder="5 ft" /></div>
+              <div class="field"><label>Posture / movement</label><input id="movement" placeholder="Upright, calm, precise" /></div>
+            </div>
+          </div>
+          <div class="card">
+            <h3>Signature Outfit</h3>
+            <div class="fieldgrid">
+              <div class="field full"><label>Canonical outfit</label><textarea id="outfit" placeholder="Describe the outfit that should stay consistent…"></textarea></div>
+              <div class="field"><label>Primary color</label><input id="primaryColor" value="#5B3FA3" /></div>
+              <div class="field"><label>Accent color</label><input id="accentColor" value="#D7C8FF" /></div>
+            </div>
+          </div>
+          <div class="card">
+            <h3>Visual Style</h3>
+            <div class="chips" id="styleChips"></div>
+          </div>
+        </div>
+        <div class="stack">
+          <div class="card preview">
+            <div class="lockpill">IDENTITY LOCK ON</div>
+            <div class="avatar"></div>
+          </div>
+          <div class="card">
+            <h3>Consistency Score</h3>
+            <div class="score">
+              <div class="metric"><b id="faceScore">0%</b><span>Face</span></div>
+              <div class="metric"><b id="hairScore">0%</b><span>Hair</span></div>
+              <div class="metric"><b id="bodyScore">0%</b><span>Body</span></div>
+              <div class="metric"><b id="outfitScore">0%</b><span>Outfit</span></div>
+            </div>
+          </div>
+          <div class="card">
+            <div class="row" style="justify-content:space-between;align-items:center"><h3 style="margin:0">Master Prompt</h3><button class="ghost" id="copyBtn">Copy</button></div>
+            <div class="promptbox" id="promptBox">Fill in the character fields to generate a reusable identity-locked prompt.</div>
+          </div>
+          <div class="card">
+            <h3>Generate Sheet</h3>
+            <div class="chips"><span class="chip">Front</span><span class="chip">3/4</span><span class="chip">Side</span><span class="chip">Back</span><span class="chip">Expressions</span><span class="chip">Poses</span></div>
+            <p style="color:var(--muted);font-size:13px">This GitHub version prepares the character data and prompt package. Connect your preferred image model/API later for actual image generation.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="charactersView" class="hidden">
+      <div class="top"><div class="title"><h1>My Characters</h1><p>Saved locally in this browser.</p></div><button class="primary" onclick="switchView('builder')">+ Create Character</button></div>
+      <div class="library" id="library"></div>
+    </section>
+
+    <section id="promptsView" class="hidden">
+      <div class="top"><div class="title"><h1>Prompt Library</h1><p>Reusable identity prompts generated from your saved characters.</p></div></div>
+      <div class="stack" id="promptLibrary"></div>
+    </section>
+
+    <section id="sceneView" class="hidden">
+      <div class="top"><div class="title"><h1>Scene Builder</h1><p>Place a saved character into a new scene without rewriting the identity.</p></div></div>
+      <div class="card">
+        <div class="fieldgrid">
+          <div class="field"><label>Character</label><select id="sceneCharacter"></select></div>
+          <div class="field"><label>Environment</label><input id="sceneEnvironment" placeholder="Rainy Tokyo alley" /></div>
+          <div class="field"><label>Action</label><input id="sceneAction" placeholder="Walking toward camera" /></div>
+          <div class="field"><label>Camera</label><input id="sceneCamera" placeholder="Medium cinematic shot" /></div>
+          <div class="field"><label>Lighting</label><input id="sceneLighting" placeholder="Neon rim light" /></div>
+          <div class="field"><label>Mood</label><input id="sceneMood" placeholder="Determined" /></div>
+        </div>
+        <div class="row" style="margin-top:14px"><button class="primary" id="sceneBtn">Build Scene Prompt</button></div>
+        <div class="promptbox" id="scenePrompt" style="margin-top:14px">Choose a saved character and add scene details.</div>
+      </div>
+    </section>
+  </main>
+</div>
+<div class="mobilebar"><button onclick="switchView('builder')">CREATE</button><button onclick="switchView('characters')">CHARACTERS</button><button onclick="switchView('prompts')">PROMPTS</button><button onclick="switchView('scene')">SCENE</button></div>
+<script>
+const styles=['Cinematic Photorealism','Photorealistic','3D Character','Anime','Manga','Graphic Novel','Fantasy Illustration','Digital Painting','Game Character','Cyberpunk','Sci-Fi'];
+let selectedStyle='Cinematic Photorealism';
+const ids=['name','charId','age','role','bio','face','skin','eyes','features','marks','hair','build','height','movement','outfit','primaryColor','accentColor'];
+const styleChips=document.getElementById('styleChips');
+styles.forEach(s=>{const b=document.createElement('button');b.className='chip'+(s===selectedStyle?' active':'');b.textContent=s;b.onclick=()=>{selectedStyle=s;[...styleChips.children].forEach(x=>x.classList.toggle('active',x.textContent===s));updatePrompt()};styleChips.appendChild(b)});
+ids.forEach(id=>document.getElementById(id).addEventListener('input',updatePrompt));
+function val(id){return document.getElementById(id).value.trim()}
+function autoId(){const n=(val('name')||'CHARACTER').toUpperCase().replace(/[^A-Z0-9]+/g,'-').replace(/^-|-$/g,'');return 'CHAR-'+n+'-'+String(Date.now()).slice(-4)}
+function scores(){const f=[val('face'),val('skin'),val('eyes'),val('features')].filter(Boolean).length/4;const h=val('hair')?1:0;const b=[val('build'),val('height'),val('movement')].filter(Boolean).length/3;const o=val('outfit')?1:0;document.getElementById('faceScore').textContent=Math.round(f*100)+'%';document.getElementById('hairScore').textContent=Math.round(h*100)+'%';document.getElementById('bodyScore').textContent=Math.round(b*100)+'%';document.getElementById('outfitScore').textContent=Math.round(o*100)+'%'}
+function buildPrompt(data){return `CHARACTER: ${data.name||'Unnamed Character'}\nCHARACTER ID: ${data.charId||'Unassigned'}\nROLE: ${data.role||'Unspecified'}\nAGE/APPEARANCE: ${data.age||'Unspecified'}\nPERSONALITY/BIO: ${data.bio||'Not provided'}\n\nFACE LOCK:\n${data.face||'Unspecified face shape'}, ${data.skin||'unspecified skin tone'}, ${data.eyes||'unspecified eyes'}, ${data.features||'unspecified facial features'}. Distinctive features: ${data.marks||'none specified'}.\n\nHAIR LOCK:\n${data.hair||'Unspecified hair'}.\n\nBODY LOCK:\n${data.build||'Unspecified build'}, height ${data.height||'unspecified'}, movement/posture ${data.movement||'unspecified'}.\n\nOUTFIT LOCK:\n${data.outfit||'Unspecified canonical outfit'}. Primary color ${data.primaryColor||''}, accent ${data.accentColor||''}.\n\nSTYLE LOCK:\n${data.style||selectedStyle}.\n\nIDENTITY LOCK:\nMaintain exactly the same character identity across every generation. Preserve facial structure, eye shape, skin tone, hairstyle, hair length, body proportions, apparent age, signature outfit, color palette, and distinctive marks. Do not redesign, beautify, age, de-age, or reinterpret the character unless explicitly instructed. Every generated image must depict the same individual.`}
+function currentData(){return Object.fromEntries(ids.map(id=>[id,val(id)]).concat([['style',selectedStyle]]))}
+function updatePrompt(){const data=currentData();if(!data.charId && data.name) document.getElementById('charId').placeholder=autoId();document.getElementById('promptBox').textContent=buildPrompt(data);scores()}
+function saveCharacter(){const data=currentData();if(!data.name){alert('Add a character name first.');return}if(!data.charId)data.charId=autoId();document.getElementById('charId').value=data.charId;data.prompt=buildPrompt(data);const list=JSON.parse(localStorage.getItem('characterLock.characters')||'[]');const i=list.findIndex(x=>x.charId===data.charId);if(i>=0)list[i]=data;else list.unshift(data);localStorage.setItem('characterLock.characters',JSON.stringify(list));renderLibraries();alert('Character saved.');updatePrompt()}
+function clearForm(){ids.forEach(id=>document.getElementById(id).value=(id==='primaryColor'?'#5B3FA3':id==='accentColor'?'#D7C8FF':''));selectedStyle='Cinematic Photorealism';[...styleChips.children].forEach(x=>x.classList.toggle('active',x.textContent===selectedStyle));updatePrompt()}
+function renderLibraries(){const list=JSON.parse(localStorage.getItem('characterLock.characters')||'[]');const lib=document.getElementById('library');lib.innerHTML=list.length?'':'<div class="card">No saved characters yet.</div>';list.forEach(c=>{const d=document.createElement('div');d.className='charcard';d.innerHTML=`<b>${c.name}</b><small>${c.charId}</small><p style="color:var(--muted);font-size:13px">${c.style}</p><div class="row"><button class="ghost" onclick='loadCharacter(${JSON.stringify(c).replace(/'/g,"&#39;")})'>Open</button><button class="ghost" onclick='deleteCharacter("${c.charId}")'>Delete</button></div>`;lib.appendChild(d)});const pl=document.getElementById('promptLibrary');pl.innerHTML=list.length?'':'<div class="card">No prompts yet.</div>';list.forEach(c=>{const d=document.createElement('div');d.className='card';d.innerHTML=`<div class="row" style="justify-content:space-between"><h3>${c.name}</h3><button class="ghost" onclick="navigator.clipboard.writeText(${JSON.stringify(c.prompt)})">Copy</button></div><div class="promptbox"></div>`;d.querySelector('.promptbox').textContent=c.prompt;pl.appendChild(d)});const sel=document.getElementById('sceneCharacter');sel.innerHTML='<option value="">Select character</option>'+list.map(c=>`<option value="${c.charId}">${c.name}</option>`).join('')}
+function loadCharacter(c){ids.forEach(id=>document.getElementById(id).value=c[id]||'');selectedStyle=c.style||styles[0];[...styleChips.children].forEach(x=>x.classList.toggle('active',x.textContent===selectedStyle));switchView('builder');updatePrompt()}
+function deleteCharacter(id){let list=JSON.parse(localStorage.getItem('characterLock.characters')||'[]').filter(x=>x.charId!==id);localStorage.setItem('characterLock.characters',JSON.stringify(list));renderLibraries()}
+function switchView(v){['builder','characters','prompts','scene'].forEach(x=>document.getElementById(x+'View').classList.toggle('hidden',x!==v));document.querySelectorAll('.nav button').forEach(b=>b.classList.toggle('active',b.dataset.view===v));renderLibraries()}
+document.querySelectorAll('.nav button').forEach(b=>b.onclick=()=>switchView(b.dataset.view));
+document.getElementById('saveBtn').onclick=saveCharacter;document.getElementById('newBtn').onclick=clearForm;document.getElementById('copyBtn').onclick=()=>navigator.clipboard.writeText(document.getElementById('promptBox').textContent);
+document.getElementById('sceneBtn').onclick=()=>{const id=document.getElementById('sceneCharacter').value;const list=JSON.parse(localStorage.getItem('characterLock.characters')||'[]');const c=list.find(x=>x.charId===id);if(!c){document.getElementById('scenePrompt').textContent='Select a saved character first.';return}const scene=`SCENE REQUEST:\nEnvironment: ${val('sceneEnvironment')||'unspecified'}\nAction: ${val('sceneAction')||'unspecified'}\nCamera: ${val('sceneCamera')||'unspecified'}\nLighting: ${val('sceneLighting')||'unspecified'}\nMood: ${val('sceneMood')||'unspecified'}\n\n${c.prompt}`;document.getElementById('scenePrompt').textContent=scene}
+renderLibraries();updatePrompt();
+</script>
+</body>
+</html>
